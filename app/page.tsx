@@ -1,13 +1,12 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import AuthButton from '@/components/AuthButton';
-import Image from "next/image";
 import AudioUpload from '@/components/AudioUpload';
 import AuthForm from '@/components/AuthForm';
 import { supabase } from '@/lib/supabase';
+import { User } from '@supabase/supabase-js';
 
 export default function Home() {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -53,7 +52,7 @@ export default function Home() {
             <span className="text-[#C0C0C0]">Notalara Dönüştür!</span>
           </h1>
           <p className="text-lg md:text-xl text-gray-300 max-w-xl animate-fade-in-up delay-100">
-            Melodify ile .wav/.mp3 dosyalarını yükle, otomatik olarak piyano notalarına ve MIDI'ye dönüştür. Sonuçları görsel olarak incele, arşivle ve paylaş.
+            Melodify ile .wav/.mp3 dosyalarını yükle, otomatik olarak piyano notalarına ve MIDI&apos;ye dönüştür. Sonuçları görsel olarak incele, arşivle ve paylaş.
           </p>
           <div className="flex gap-4 mt-2 animate-fade-in-up delay-200">
             <button className="bg-[#FFD700] text-black font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-[#e6c200] transition-all text-lg">

@@ -20,7 +20,7 @@ export default function AudioUpload({ onUpload }: { onUpload: (fileUrl: string) 
 
     const fileExt = file.name.split('.').pop();
     const fileName = `${Date.now()}.${fileExt}`;
-    const { data, error } = await supabase.storage
+    const { error } = await supabase.storage
       .from('audio-files')
       .upload(fileName, file);
 
@@ -66,7 +66,7 @@ export default function AudioUpload({ onUpload }: { onUpload: (fileUrl: string) 
       } else {
         setTranscribeError('Transkripsiyon başarısız.');
       }
-    } catch (err) {
+    } catch {
       setTranscribeError('Transkripsiyon sırasında hata oluştu.');
     }
     setTranscribing(false);

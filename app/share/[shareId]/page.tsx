@@ -28,7 +28,7 @@ export default function SharedTranscriptionPage({ params }: { params: { shareId:
         if (!data) throw new Error('Transkripsiyon bulunamadı');
 
         setTranscription(data);
-      } catch (err) {
+      } catch {
         setError('Bu transkripsiyon artık mevcut değil veya paylaşım süresi dolmuş.');
       } finally {
         setLoading(false);

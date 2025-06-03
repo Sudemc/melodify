@@ -15,7 +15,7 @@ export default function MIDIPianoRoll({ midiUrl }: { midiUrl: string }) {
       const midi = await fetch(midiUrl).then(res => res.arrayBuffer());
       const seq = mm.midiToSequenceProto(new Uint8Array(midi));
       // Visualizer oluştur
-      visualizer = new mm.PianoRollSVGVisualizer(seq, containerRef.current as any, {
+      visualizer = new mm.PianoRollSVGVisualizer(seq, containerRef.current, {
         noteHeight: 6,
         pixelsPerTimeStep: 24,
         noteSpacing: 1,
