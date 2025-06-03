@@ -5,33 +5,34 @@ export default function MIDIPianoRoll({ midiUrl }: { midiUrl: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let visualizer: mm.PianoRollSVGVisualizer | null = null;
-    let svg: SVGSVGElement | null = null;
+    const container = containerRef.current;
+    if (!container) return;
+
     async function draw() {
-      if (!containerRef.current) return;
       // Eski SVG'yi temizle
-      containerRef.current.innerHTML = '';
+      container.innerHTML = '';
       // MIDI dosyasını çek
       const midi = await fetch(midiUrl).then(res => res.arrayBuffer());
       const seq = mm.midiToSequenceProto(new Uint8Array(midi));
       // Visualizer oluştur
-      visualizer = new mm.PianoRollSVGVisualizer(seq, containerRef.current, {
+      new mm.PianoRollSVGVisualizer(seq, container, {
         noteHeight: 6,
         pixelsPerTimeStep: 24,
         noteSpacing: 1,
         activeNoteRGB: '0, 200, 255',
       });
       // SVG'yi responsive yap
-      svg = containerRef.current.querySelector('svg');
+      const svg = container.querySelector('svg');
       if (svg) {
         svg.setAttribute('width', '100%');
         svg.setAttribute('height', '120');
         svg.style.maxWidth = '600px';
       }
     }
+
     draw();
     return () => {
-      if (containerRef.current) containerRef.current.innerHTML = '';
+      if (container) container.innerHTML = '';
     };
   }, [midiUrl]);
 
